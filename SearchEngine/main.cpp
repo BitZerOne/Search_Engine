@@ -1,8 +1,7 @@
 #include <iostream>
-#include <fstream>
-#include <nlohmann/json.hpp>
-
-using json = nlohmann::json;
+#include <vector>
+#include <string>
+#include "converterjson.h"
 using std::cin;
 using std::cout;
 using std::endl;
@@ -10,24 +9,22 @@ using std::endl;
 
 int main()
 {
+    ConverterJSON cjs;
 
-    std::ifstream f("../example.json");
-    json data;
-    if(f.is_open())
-    {
-        data = json::parse(f);
-        f.close();
+    std::vector<std::string> documents(cjs.GetTextDocuments());
+    std::vector<std::string> reque(cjs.GetRequests());
 
-    }
-    else std::cerr << "file not fond" << endl;
+    try {
+        for(const auto & i : documents)
+            cout << i << endl;
 
-    if(!data.empty())
-    {
-//        cout << data.dump(4) << endl;
-        for (auto& el : data.items())
-        {
-            std::cout << "key: " << el.key() << ", value: " << el.value() << '\n';
-        }
+        cout << cjs.GetResponsesLimit() << endl;
+
+        for(const auto & i : reque)
+            cout << i << endl;
+
+    }  catch (std::exception &e) {
+        std::cerr << e.what() << "\n";
     }
 
     return 0;

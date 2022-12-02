@@ -5,11 +5,17 @@
 
 #include <string>
 #include <vector>
+#include <fstream>
+#include <nlohmann/json.hpp>
+
+using json = nlohmann::json;
 
 
 
 class ConverterJSON
 {
+private:
+    json config;
 public:
     ConverterJSON();
 /**
