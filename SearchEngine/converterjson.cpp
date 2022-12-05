@@ -18,8 +18,8 @@ std::vector<std::string> ConverterJSON::GetTextDocuments()
         else
             config = json::parse(file);
         file.close();
-    }
-    else throw std::runtime_error("config file is missing");
+    }else
+        throw std::runtime_error("config file is missing");
 
     std::vector<std::string> listOfFiles{};
 
@@ -72,10 +72,10 @@ std::vector<std::string> ConverterJSON::GetRequests()
         else
             requestsJson = json::parse(file);
         file.close();
-    }
-    else throw std::runtime_error("requests file is missing");
+    }else
+        throw std::runtime_error("requests file is missing");
 
-    std::vector<std::string> requests{};
+    std::vector<std::string> requests{"7", "7"};
 
     if(!requestsJson.empty())
     {
@@ -86,4 +86,9 @@ std::vector<std::string> ConverterJSON::GetRequests()
     }
 
     return requests;
+}
+
+void ConverterJSON::putAnswers(std::vector<std::vector<std::pair<int, float>>> answers)
+{
+
 }
